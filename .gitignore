@@ -43,7 +43,7 @@ __pycache__/
 **/coverage/
 
 # Local databases
-*.db
+# *.db
 
 # Android Studio artifacts
 **/android/app/debug
