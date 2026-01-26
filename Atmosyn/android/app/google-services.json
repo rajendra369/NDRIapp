@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "202143391798",
+    "project_id": "muhandc-24122025",
+    "storage_bucket": "muhandc-24122025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202143391798:android:fffb2d6d335a1fc0cdb897",
+        "android_client_info": {
+          "package_name": "org.ndri.Muhan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKhSGAmPV2yMv-37iBEL0_1lc57h_pVX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

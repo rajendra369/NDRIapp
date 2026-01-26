@@ -8,15 +8,15 @@ This repository hosts multiple applications and tools for NDRI (Nepal Developmen
 
 ## Project Structure
 
-- **[Meteoflow/](./Meteoflow)**: The primary mobile application for meteorological data collection.
+- **[Atmosyn/](./Atmosyn)**: The primary mobile application for meteorological data collection.
 - **[backend/](./backend)**: Backend services and API for data synchronization.
 - **[V1/](./V1)**: Legacy version/references.
 
 ## Getting Started
 
-### Meteoflow (Mobile App)
-To run the Meteoflow application:
-1. Navigate to the `Meteoflow` directory.
+### Atmosyn (Mobile App)
+To run the Atmosyn application:
+1. Navigate to the `Atmosyn` directory.
 2. Run `flutter pub get`.
 3. Use `flutter run` to launch on your device/emulator.
 
