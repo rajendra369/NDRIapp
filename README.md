@@ -1,5 +1,5 @@
 # AtmosynApp
-
+#ATMOSYN – Atmospheric SYNthesis
 This is the official Git Repository for the Atmosyn ecosystem.
 <br>
 Author: Engineer, Rajendra Kr. Shrestha
