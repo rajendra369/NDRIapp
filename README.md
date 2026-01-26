@@ -1,10 +1,10 @@
-# NDRIapp
+# AtmosynApp
 
-This is the Git Repository of NDRIapp 
+This is the official Git Repository for the Atmosyn ecosystem.
 <br>
 Author: Engineer, Rajendra Kr. Shrestha
 
-This repository hosts multiple applications and tools for NDRI (Nepal Development Research Institute).
+This repository hosts the Atmosyn mobile application and its associated backend services for meteorological research.
 
 ## Project Structure
 
