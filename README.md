@@ -10,7 +10,7 @@ This repository hosts the Atmosyn mobile application and its associated backend 
 
 - **[Atmosyn/](./Atmosyn)**: The primary mobile application for meteorological data collection.
 - **[backend/](./backend)**: Backend services and API for data synchronization.
-- **[V1/](./V1)**: Legacy version/references.
+- **Legacy Prototypes**: The original web-based prototype remains available in the `Atmosyn-Web-Prototyp` branch.
 
 ## Getting Started
 
