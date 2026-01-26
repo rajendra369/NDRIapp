@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain & Discharge Collector</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Collector</h1>
+            <p>Rain Fall & Spring Discharge</p>
+        </header>
+
+        <main>
+            <form id="dataForm">
+                <div class="input-group">
+                    <label for="collector">Data Collector</label>
+                    <select id="collector" required>
+                        <option value="">Select Collector...</option>
+                        <option value="Chhabi Thapa">Chhabi Thapa</option>
+                        <option value="Niruta Purbachhane">Niruta Purbachhane</option>
+                        <option value="Menuka Rai">Menuka Rai</option>
+                        <option value="Yuvaraja Shrestha">Yuvaraja Shrestha</option>
+                        <option value="Muna Kumari Pahadi">Muna Kumari Pahadi</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Entry Type</label>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <label style="display: flex; align-items: center; gap: 8px; margin: 0; font-weight: normal;">
+                            <input type="radio" name="entryType" value="rain" checked style="width: auto;"> Rainfall
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; margin: 0; font-weight: normal;">
+                            <input type="radio" name="entryType" value="flow" style="width: auto;"> Discharge
+                        </label>
+                    </div>
+                </div>
+
+                <div class="station-group" id="rainSection">
+                    <h3>Rainfall Data</h3>
+                    <div class="input-group">
+                        <label for="rainStation">Station Name</label>
+                        <select id="rainStation">
+                            <option value="">Select Station...</option>
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="rainfall">Rain Fall (mm)</label>
+                        <input type="number" id="rainfall" step="0.1" placeholder="0.0" inputmode="decimal">
+                    </div>
+                </div>
+
+                <div class="station-group" id="flowSection" style="display: none;">
+                    <h3>Discharge Data</h3>
+                    <div class="input-group">
+                        <label for="flowStation">Spring/Stream Name</label>
+                        <select id="flowStation">
+                            <option value="">Select Spring...</option>
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="discharge">Spring Discharge (LPS)</label>
+                        <input type="number" id="discharge" step="0.01" placeholder="0.00" inputmode="decimal">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Record Data</button>
+            </form>
+
+            <div class="data-list-section">
+                <div class="section-header">
+                    <h2>Recorded Data</h2>
+                    <span id="recordCount">0 records</span>
+                </div>
+                <div id="dataList" class="data-list">
+                    <!-- Data items will appear here -->
+                    <div class="empty-state">No data recorded yet.</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div style="display: flex; gap: 10px; flex-direction: column;">
+                <button id="exportRainBtn" class="btn-secondary">Export Rain Data (CSV)</button>
+                <button id="exportFlowBtn" class="btn-secondary">Export Discharge Data (CSV)</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDKs (v8 Compat for file:// support) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
