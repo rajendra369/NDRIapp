@@ -4,7 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import '../models/station_mapping.dart';
-import 'station_viz_dialog.dart';
+import 'station_trend_dialog.dart';
+import 'settings_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -19,6 +20,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<Polyline> _districtBoundaries = [];
   List<Polyline> _palikaBoundaries = [];
   bool _isLoadingMap = true;
+
+  // Map center for Sindhuli monitoring area
+  static const LatLng _sindhuliCenter = LatLng(27.30, 85.90);
+  static const double _initialZoom = 10.5;
 
   @override
   void initState() {
@@ -113,43 +118,79 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _showStationData(String stationId) {
     showDialog(
       context: context,
-      builder: (context) => StationVizDialog(stationId: stationId),
+      builder: (context) => StationTrendDialog(stationId: stationId),
     );
+  }
+
+  void _centerOnStations() {
+    _mapController.move(_sindhuliCenter, _initialZoom);
   }
 
   @override
   Widget build(BuildContext context) {
+    // Build markers for only monitored stations
     final stationMarkers = StationMapping.coordinates.entries.map((entry) {
+      final stationId = entry.key;
+      final coords = entry.value;
+      final stationType = StationMapping.getStationType(stationId);
+      final isSpring = stationType == 'Spring';
+
+      // Get station code
+      // Springs: "S-602" from "Flow_S602"
+      // Rain Gauges: "M-201" from "Index_311050201" (M- + last 3 digits)
+      String stationCode;
+      if (isSpring) {
+        stationCode = stationId.replaceAll('Flow_', '');
+      } else {
+        // Rain gauge: get last 3 digits and add M- prefix
+        final code = stationId.replaceAll('Index_', '');
+        stationCode = 'M-${code.substring(code.length - 3)}';
+      }
+
       return Marker(
-        point: LatLng(entry.value[0], entry.value[1]),
-        width: 40,
-        height: 40,
+        point: LatLng(coords[0], coords[1]),
+        width: 80,
+        height: 60,
         alignment: Alignment.topCenter,
         child: GestureDetector(
-          onDoubleTap: () => _showStationData(entry.key),
+          onTap: () => _showStationData(stationId),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                decoration: const BoxDecoration(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
-                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+                  boxShadow: const [
+                    BoxShadow(blurRadius: 4, color: Colors.black26),
+                  ],
+                  border: Border.all(
+                    color: isSpring ? Colors.blue : Colors.orange,
+                    width: 2,
+                  ),
                 ),
                 child: Icon(
-                  entry.key.contains('Flow') ? Icons.waves : Icons.water_drop,
-                  color: entry.key.contains('Flow') ? Colors.blue : Colors.cyan,
-                  size: 20,
+                  isSpring ? Icons.waves : Icons.water_drop,
+                  color: isSpring ? Colors.blue : Colors.orange,
+                  size: 18,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                margin: const EdgeInsets.only(top: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.black54,
+                  color: isSpring ? Colors.blue[700] : Colors.orange[700],
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(
-                  entry.key.split('_').last,
-                  style: const TextStyle(color: Colors.white, fontSize: 8),
+                  stationCode,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
@@ -160,7 +201,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nepal Data Dashboard'),
+        title: const Text('Sindhuli Monitoring Dashboard'),
         actions: [
           if (_isLoadingMap)
             const Padding(
@@ -170,25 +211,87 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
-          IconButton(icon: const Icon(Icons.refresh), onPressed: _loadMapData),
+          IconButton(
+            icon: const Icon(Icons.my_location),
+            tooltip: 'Center on stations',
+            onPressed: _centerOnStations,
+          ),
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            tooltip: 'Reload map',
+            onPressed: _loadMapData,
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
+          ),
         ],
       ),
-      body: FlutterMap(
-        mapController: _mapController,
-        options: const MapOptions(
-          initialCenter: LatLng(28.3949, 84.1240),
-          initialZoom: 7,
-          minZoom: 5,
-        ),
+      body: Stack(
         children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'org.ndri.muhan',
+          FlutterMap(
+            mapController: _mapController,
+            options: const MapOptions(
+              initialCenter: _sindhuliCenter,
+              initialZoom: _initialZoom,
+              minZoom: 5,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'org.ndri.muhan',
+              ),
+              PolylineLayer(polylines: _palikaBoundaries),
+              PolylineLayer(polylines: _districtBoundaries),
+              PolylineLayer(polylines: _provinceBoundaries),
+              MarkerLayer(markers: stationMarkers),
+            ],
           ),
-          PolylineLayer(polylines: _palikaBoundaries),
-          PolylineLayer(polylines: _districtBoundaries),
-          PolylineLayer(polylines: _provinceBoundaries),
-          MarkerLayer(markers: stationMarkers),
+
+          // Legend
+          Positioned(
+            bottom: 16,
+            left: 16,
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.95),
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: const [
+                  BoxShadow(blurRadius: 4, color: Colors.black26),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Legend',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(height: 8),
+                  _buildLegendItem(Icons.waves, Colors.blue, 'Spring (7)'),
+                  const SizedBox(height: 4),
+                  _buildLegendItem(
+                    Icons.water_drop,
+                    Colors.orange,
+                    'Rain Gauge (4)',
+                  ),
+                  const Divider(),
+                  Text(
+                    'Tap marker to view trends',
+                    style: TextStyle(fontSize: 9, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
       floatingActionButton: Column(
@@ -213,6 +316,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildLegendItem(IconData icon, Color color, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: color, size: 16),
+        const SizedBox(width: 6),
+        Text(label, style: const TextStyle(fontSize: 11)),
+      ],
     );
   }
 }

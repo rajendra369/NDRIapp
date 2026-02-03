@@ -1,28 +1,24 @@
 class StationMapping {
-  // Station mappings for each collector (Reverted to V1 structure)
+  // Station mappings for each collector
   static const Map<String, Map<String, List<String>>> mapping = {
     'Chhabi Thapa': {
-      'flow': ['Flow_311050406'],
+      'flow': ['Flow_S406'],
     },
     'Niruta Purbachhane': {
-      'rain': [
-        'Index_311050201',
-        'Index_110701_Daily',
-        'Index_110702_Daily',
-      ],
-      'flow': ['Flow_311050218', 'Flow_311050219'],
+      'rain': ['Index_311050201'],
+      'flow': ['Flow_S218', 'Flow_S219'],
     },
     'Menuka Rai': {
-      'rain': ['Index_311050601', 'Index_585_Daily'],
-      'flow': ['Flow_311050719', 'Flow_311050602'],
+      'rain': ['Index_311050601'],
+      'flow': ['Flow_S719', 'Flow_S602'],
     },
     'Yuvaraja Shrestha': {
-      'rain': ['Index_311060401', 'Index_1115_Daily'],
-      'flow': ['Flow_311060410', 'Flow_311060306'],
+      'rain': ['Index_311060401'],
+      'flow': ['Flow_S410'],
     },
     'Muna Kumari Pahadi': {
       'rain': ['Index_311060301'],
-      'flow': ['Flow_311060306'],
+      'flow': ['Flow_S306'],
     },
   };
 
@@ -35,172 +31,140 @@ class StationMapping {
     'Muna Kumari Pahadi',
   ];
 
-  // Station Metadata for CSV Headers
+  // Station Metadata for CSV Headers - Spring Monitoring Stations
   static const Map<String, Map<String, String>> metadata = {
-    'Flow_311050406': {
-      'region': 'Sindhupalchok',
-      'muni': 'Bhotekoshi-4',
-      'loc': 'Bhotekoshi River',
-      'lat': '28.053',
-      'lon': '85.321',
-      'alt': '1450',
-      'collector': 'Chhabi Thapa',
+    // Spring Monitoring Stations (Flow)
+    'Flow_S602': {
+      'name': 'Panityanki',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai-6',
+      'loc': 'Panityanki Spring',
+      'lat': '27.213855',
+      'lon': '85.924468',
+      'alt': '485',
+      'type': 'Spring',
     },
+    'Flow_S719': {
+      'name': 'Bardyautar',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai',
+      'loc': 'Bardyautar Spring',
+      'lat': '27.214045',
+      'lon': '85.930664',
+      'alt': '471',
+      'type': 'Spring',
+    },
+    'Flow_S218': {
+      'name': 'Gwang Khola',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai',
+      'loc': 'Gwang Khola Spring',
+      'lat': '27.257651',
+      'lon': '85.947514',
+      'alt': '683',
+      'type': 'Spring',
+    },
+    'Flow_S219': {
+      'name': 'Simgaun',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai',
+      'loc': 'Simgaun Spring',
+      'lat': '27.2574504758',
+      'lon': '85.9477912774',
+      'alt': '724',
+      'type': 'Spring',
+    },
+    'Flow_S406': {
+      'name': 'Saatpatre',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai',
+      'loc': 'Saatpatre Spring',
+      'lat': '27.251225',
+      'lon': '85.912832',
+      'alt': '627',
+      'type': 'Spring',
+    },
+    'Flow_S306': {
+      'name': 'Kalimati',
+      'region': 'Sindhuli',
+      'muni': 'Sunkoshi-3',
+      'loc': 'Kalimati Spring',
+      'lat': '27.403767',
+      'lon': '85.872903',
+      'alt': '576',
+      'type': 'Spring',
+    },
+    'Flow_S410': {
+      'name': 'Deurali (Thulo Khola)',
+      'region': 'Sindhuli',
+      'muni': 'Sunkoshi',
+      'loc': 'Deurali Thulo Khola Spring',
+      'lat': '27.361479',
+      'lon': '85.847604',
+      'alt': '1613',
+      'type': 'Spring',
+    },
+
+    // Rain Gauge Stations
     'Index_311050201': {
-      'region': 'Kathmandu',
-      'muni': 'KMC-1',
-      'loc': 'Naxal',
-      'lat': '27.721',
-      'lon': '85.342',
-      'alt': '1350',
-      'collector': 'Niruta Purbachhane',
-    },
-    'Flow_311050218': {
-      'region': 'Kathmandu',
-      'muni': 'KMC-3',
-      'loc': 'Lazimpat',
-      'lat': '27.712',
-      'lon': '85.312',
-      'alt': '1320',
-      'collector': 'Niruta Purbachhane',
-    },
-    'Flow_311050219': {
-      'region': 'Kathmandu',
-      'muni': 'KMC-4',
-      'loc': 'Baluwatar',
-      'lat': '27.701',
-      'lon': '85.334',
-      'alt': '1330',
-      'collector': 'Niruta Purbachhane',
+      'name': 'Chiyabari',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai-2',
+      'loc': 'Personal land (house yard)',
+      'lat': '27.250358',
+      'lon': '85.937691',
+      'alt': '627.5',
+      'type': 'Rain Gauge',
     },
     'Index_311050601': {
-      'region': 'Kaski',
-      'muni': 'Pokhara-6',
-      'loc': 'Lakeside',
-      'lat': '28.192',
-      'lon': '84.012',
-      'alt': '820',
-      'collector': 'Menuka Rai',
-    },
-    'Flow_311050719': {
-      'region': 'Kaski',
-      'muni': 'Pokhara-15',
-      'loc': 'Seti River',
-      'lat': '28.210',
-      'lon': '84.004',
-      'alt': '810',
-      'collector': 'Menuka Rai',
-    },
-    'Flow_311050602': {
-      'region': 'Kaski',
-      'muni': 'Pokhara-1',
-      'loc': 'Baglung Buspark',
-      'lat': '28.234',
-      'lon': '84.056',
-      'alt': '850',
-      'collector': 'Menuka Rai',
+      'name': 'Panitanki',
+      'region': 'Sindhuli',
+      'muni': 'Kamalamai-6',
+      'loc': 'Government Water tank compound',
+      'lat': '27.215199',
+      'lon': '85.924586',
+      'alt': '506.3',
+      'type': 'Rain Gauge',
     },
     'Index_311060401': {
-      'region': 'Morang',
-      'muni': 'Biratnagar-2',
-      'loc': 'Main Road',
-      'lat': '26.834',
-      'lon': '87.294',
-      'alt': '80',
-      'collector': 'Yuvaraja Shrestha',
-    },
-    'Flow_311060410': {
-      'region': 'Morang',
-      'muni': 'Biratnagar-10',
-      'loc': 'Hospital Road',
-      'lat': '26.812',
-      'lon': '87.283',
-      'alt': '75',
-      'collector': 'Yuvaraja Shrestha',
-    },
-    'Flow_311060306': {
-      'region': 'Sunsari',
-      'muni': 'Dharan-1',
-      'loc': 'Bhanuchowk',
-      'lat': '26.901',
-      'lon': '87.123',
-      'alt': '350',
-      'collector': 'Yuvaraja Shrestha',
+      'name': 'Kotgaun',
+      'region': 'Sindhuli',
+      'muni': 'Sunkoshi-4',
+      'loc': 'Personal House Yard',
+      'lat': '27.384385',
+      'lon': '85.857803',
+      'alt': '1213.2',
+      'type': 'Rain Gauge',
     },
     'Index_311060301': {
-      'region': 'Sunsari',
-      'muni': 'Dharan-15',
-      'loc': 'Ghantaghar',
-      'lat': '26.912',
-      'lon': '87.112',
-      'alt': '360',
-      'collector': 'Muna Kumari Pahadi',
-    },
-    // DHM Stations
-    'Index_110701_Daily': {
-      'region': 'DHM',
-      'muni': 'Various',
-      'loc': 'DHM Network',
-      'lat': '27.345',
-      'lon': '86.123',
-      'alt': 'Unknown',
-      'collector': 'DHM Official',
-    },
-    'Index_110702_Daily': {
-      'region': 'DHM',
-      'muni': 'Various',
-      'loc': 'DHM Network',
-      'lat': '27.890',
-      'lon': '84.567',
-      'alt': 'Unknown',
-      'collector': 'DHM Official',
-    },
-    'Index_585_Daily': {
-      'region': 'DHM',
-      'muni': 'Various',
-      'loc': 'DHM Network',
-      'lat': '28.234',
-      'lon': '83.123',
-      'alt': 'Unknown',
-      'collector': 'DHM Official',
-    },
-    'Index_1115_Daily': {
-      'region': 'DHM',
-      'muni': 'Various',
-      'loc': 'DHM Network',
-      'lat': '29.123',
-      'lon': '82.345',
-      'alt': 'Unknown',
-      'collector': 'DHM Official',
+      'name': 'Kalimati',
+      'region': 'Sindhuli',
+      'muni': 'Sunkoshi-3',
+      'loc': 'Personal House Yard',
+      'lat': '27.409330',
+      'lon': '85.879965',
+      'alt': '695.9',
+      'type': 'Rain Gauge',
     },
   };
 
   // Station coordinates for Map Visualization [lat, lng]
+  // Only monitored stations in Sindhuli area
   static const Map<String, List<double>> coordinates = {
-    // Flow Stations
-    'Flow_311050406': [28.053, 85.321],
-    'Flow_311050218': [27.712, 85.312],
-    'Flow_311050219': [27.701, 85.334],
-    'Flow_311050719': [28.210, 84.004],
-    'Flow_311050602': [28.234, 84.056],
-    'Flow_311060410': [26.812, 87.283],
-    'Flow_311060306': [26.901, 87.123],
+    // Spring Monitoring Stations (7)
+    'Flow_S602': [27.213855, 85.924468],
+    'Flow_S719': [27.214045, 85.930664],
+    'Flow_S218': [27.257651, 85.947514],
+    'Flow_S219': [27.2574504758, 85.9477912774],
+    'Flow_S406': [27.251225, 85.912832],
+    'Flow_S306': [27.403767, 85.872903],
+    'Flow_S410': [27.361479, 85.847604],
 
-    // Rain Stations
-    'Index_311050201': [27.721, 85.342],
-    'Index_311050601': [28.192, 84.012],
-    'Index_311060401': [26.834, 87.294],
-    'Index_311060301': [26.912, 87.112],
-
-    // DHM Stations
-    'Index_110701_Daily': [27.345, 86.123],
-    'Index_110701_Hourly': [27.345, 86.126],
-    'Index_110702_Daily': [27.890, 84.567],
-    'Index_110702_Hourly': [27.890, 84.570],
-    'Index_585_Daily': [28.234, 83.123],
-    'Index_585_Hourly': [28.234, 83.126],
-    'Index_1115_Daily': [29.123, 82.345],
-    'Index_1115_Hourly': [29.123, 82.348],
+    // Rain Gauge Stations (4)
+    'Index_311050201': [27.250358, 85.937691],
+    'Index_311050601': [27.215199, 85.924586],
+    'Index_311060401': [27.384385, 85.857803],
+    'Index_311060301': [27.409330, 85.879965],
   };
 
   // Get rain stations for a collector
@@ -239,5 +203,15 @@ class StationMapping {
 
   static List<double>? getCoordinates(String stationId) {
     return coordinates[stationId];
+  }
+
+  // Get station display name
+  static String getStationName(String stationId) {
+    return metadata[stationId]?['name'] ?? stationId;
+  }
+
+  // Get station type (Spring or Rain Gauge)
+  static String getStationType(String stationId) {
+    return metadata[stationId]?['type'] ?? 'Unknown';
   }
 }

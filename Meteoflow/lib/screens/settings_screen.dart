@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/collector.dart';
 import '../services/firestore_service.dart';
+import 'import_data_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -142,6 +143,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     );
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ImportDataScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.file_upload),
+                    label: const Text('Import Historical Data (Excel)'),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.all(16),
+                      backgroundColor: Colors.blue[800],
+                    ),
+                  ),
                 ),
               ),
               Padding(

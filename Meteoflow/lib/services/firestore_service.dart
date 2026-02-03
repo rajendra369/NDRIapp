@@ -5,7 +5,7 @@ import '../models/collector.dart';
 import '../models/station_mapping.dart';
 
 class FirestoreService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  FirebaseFirestore get _firestore => FirebaseFirestore.instance;
   final String _collectionName = 'records';
 
   // Save or update a record (upsert with merge)
