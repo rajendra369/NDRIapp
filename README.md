@@ -1,6 +1,6 @@
 # HMObservetory – Hydrological & Meteorological Observatory
 
-Official Git Repository for the HMObservetory ecosystem. This repository represents the **Restored V1 Core** as of February 2026.
+Official Git Repository for the HMObservetory ecosystem. This repository represents the **Initial V1 Core** as of February 2026.
 
 **Author:** Engineer, Rajendra Kr. Shrestha
 
@@ -10,10 +10,10 @@ Official Git Repository for the HMObservetory ecosystem. This repository represe
 
 HMObservetory is a professional Dart/Flutter-mobile application designed for meteorological research and high-accuracy data collection. 
 
-This version restores the critical "Data Collector" and "Station Management" logic, ensuring geographical accuracy and standardized reporting for hydrological and meteorological analysis.
+This version implements the critical "Data Collector" and "Station Management" logic, ensuring geographical accuracy and standardized reporting for hydrological and meteorological analysis.
 
-### ✨ Key Restored Features
-- **Legacy Station Mappings**: Re-integrated the exact collector-to-station assignments from the V1 system.
+### ✨ Key Features
+- **Station Mappings**: Integrated the exact collector-to-station assignments from the V1 system.
 - **Rich Geographical Metadata**: Every station now exports with District, Municipality, Latitude, Longitude, and Altitude.
 - **Professional 8-Row CSV Headers**: Standardized export format for seamless import into research analysis tools.
 - **Hydrological Units**: All spring discharge measurements are standardized to **LPS** (Liters Per Second).
@@ -23,7 +23,7 @@ This version restores the critical "Data Collector" and "Station Management" log
 ## 📂 Repository Structure
 
 - **[HMObservetory/HMObservetory/](./HMObservetory/HMObservetory/)**: The active Flutter project.
-- **[TASKS.md](./TASKS.md)**: Full restoration history and task checklist.
+- **[TASKS.md](./TASKS.md)**: Full development history and task checklist.
 
 ---
 
@@ -35,4 +35,4 @@ This version restores the critical "Data Collector" and "Station Management" log
 3. Launch on device: `flutter run`
 
 ### Exporting Data
-Navigate to the **View Data** screen and use the Export options. The app will generate wide-format CSV files with the restored 8-row metadata headers, ready for analysis.
+Navigate to the **View Data** screen and use the Export options. The app will generate wide-format CSV files with the 8-row metadata headers, ready for analysis.
